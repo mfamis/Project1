@@ -1,20 +1,241 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" class="no-js">
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Project 1</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+	<script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+	 crossorigin="anonymous">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Knewave" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css">
+	<!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Resource style -->
+	<script src="js/modernizr.js"></script>
+	<!-- Modernizr -->
+
+	<title>Rouleats</title>
 </head>
+
 <body>
-    
+	<header class="cd-header">
+		<a href="#0" class="cd-3d-nav-trigger">
+			Menu
+			<span></span>
+		</a>
+	</header>
+	<!-- .cd-header -->
+	<main>
+		<div class="container">
+			<h1>Roul<span class="eats">EATS</span>
+			</h1>
+
+			<div class="box">
+				<div id="cube">
+					<div class="front">
+						<img src="https://image.flaticon.com/icons/svg/1036/1036678.svg">
+					</div>
+					<div class="back">
+						<img src="https://image.flaticon.com/icons/svg/883/883806.svg">
+					</div>
+					<div class="right">
+						<img src="https://image.flaticon.com/icons/svg/811/811643.svg">
+					</div>
+					<div class="left">
+						<img src="https://image.flaticon.com/icons/svg/817/817239.svg">
+					</div>
+					<div class="top">
+						<img src="https://image.flaticon.com/icons/svg/130/130966.svg">
+					</div>
+					<div class="bottom">
+						<img src="https://image.flaticon.com/icons/svg/135/135484.svg">
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<p>Feeling indecisive today? Let us decide for you.</p>
+			<br>
+			<br>
+			<div class="link">
+				<a class="start" href="#">Let's get started!</a>
+			</div>
+
+	</main>
+
+	<div class="getstarted">
+		<div class="container">
+			<!-- Switch -->
+			<h1>Let's get started!</h1>
+			<br>
+			<br>
+			<p>What do you feel like eating?</p>
+			<form action="#">
+				<p>
+					<label>
+						<input type="checkbox" />
+						<span>American</span>
+					</label>
+
+					<label>
+						<input type="checkbox" />
+						<span>Mexican</span>
+					</label>
+					<label>
+						<input type="checkbox" />
+						<span>Asian</span>
+					</label>
+					<label>
+						<input type="checkbox" />
+						<span>Italian</span>
+					</label>
+					<label>
+						<input type="checkbox" />
+						<span>Anything</span>
+					</label>
+				</p>
+			</form>
+			<p>Are you walking or driving?</p>
+			<div class="switch">
+				<label>
+					Yes
+					<input type="checkbox">
+					<span class="lever"></span>
+					No
+				</label>
+			</div>
+			<p>Rating</p>
+			<form action="#">
+				<p>
+					<label>
+						<input name="group1" type="radio" checked />
+						<span>1 and up</span>
+					</label>
+
+					<label>
+						<input name="group1" type="radio" />
+						<span>2 and up</span>
+					</label>
+
+					<label>
+						<input class="with-gap" name="group1" type="radio" />
+						<span>3 and up</span>
+					</label>
+
+					<label>
+						<input name="group1" type="radio" disabled="disabled" />
+						<span>4 and up</span>
+					</label>
+				</p>
+			</form>
+
+			<p>What is your price range?</p>
+			<div id="test-slider"></div>
+
+			<p>More options</p>
+			<form action="#">
+				<p>
+					<label>
+						<input type="checkbox" />
+						<span>Biking</span>
+					</label>
+					<label>
+						<input type="checkbox" />
+						<span>Wifi</span>
+					</label>
+					<label>
+						<input type="checkbox" />
+						<span>Group</span>
+					</label>
+					<label>
+						<input type="checkbox" />
+						<span>Study</span>
+					</label>
+					<label>
+						<input type="checkbox" />
+						<span>..</span>
+					</label>
+					<label>
+						<input type="checkbox" />
+						<span>..</span>
+					</label>
+					<label>
+						<input type="checkbox" />
+						<span>..</span>
+					</label>
+				</p>
+			</form>
+
+			<button class="btn waves-effect waves-light" type="submit" name="action">Finished!
+				<i class="material-icons right"></i>
+			</button>
+
+			<br>
+			<br>
+
+		</div>
+	</div>
+
+	<div class="about"></div>
+	<div class="restaurants"></div>
+	<div class="settings"></div>
+	<div class="new"></div>
+
+	<nav class="cd-3d-nav-container">
+		<ul class="cd-3d-nav">
+			<li class="cd-selected">
+				<a class="home" href="#0">Home</a>
+			</li>
+
+			<li>
+				<a class="aboutus" href="#0">About</a>
+			</li>
+
+			<li>
+				<a class="food" href="#0">Restaurants</a>
+			</li>
+
+			<li>
+				<a class="edit" href="#0">Settings</a>
+			</li>
+
+			<li>
+				<a class="newstuff" href="#0">New</a>
+			</li>
+		</ul>
+		<!-- .cd-3d-nav -->
+
+		<span class="cd-marker color-1"></span>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		 crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		 crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+		 crossorigin="anonymous"></script>
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>
+	</nav>
+	<!-- .cd-3d-nav-container -->
+	<script src="js/jquery-2.1.1.js"></script>
+	<script src="js/main.js"></script>
+	<!-- Resource jQuery -->
 </body>
+
 </html>
