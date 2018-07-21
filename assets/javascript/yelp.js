@@ -1,25 +1,48 @@
-var APIKEY = "nHKZkRiu2tXKRPBbadE4xrF-Am4zY_ZQL3vIbyBbjkrbLvjeWaFyHm7wLD6KPbE41ZHPBXOno0L-hHMpThJG0CNJvomCZlsnr6VY_evs7Oco6jYioHh6eLtyeltRW3Yx";
-var CLIENTID = "ZpCIXNh4sgX0A9egGG6wzA";
-
+var APIKEY = "7e43dd3df445b7aee59f4e05cf1204c7";
 /*
-$.ajaxSetup({
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Bearer ' + APIKEY);
-    }
-});
+$.ajax(
+    {
+        method: "GET",
+        crossDomain: true,
+        url: "https://developers.zomato.com/api/v2.1/search?count=10&lat=37.79161&lon=-122.42143",
+        dataType: "json",
+        async: true,
+        headers: { "user-key": APIKEY },
+    }).then(function(r) {console.log(r);});
 */
 
-var query = "https://api.yelp.com/v3/businesses/search?term=food&latitude=38.577022&longitude=-121.477360";
-
-var ajaxQuery = { 
-    url: query, 
-    method: "GET",
-    beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + APIKEY);},
-}
-
-function yelpResponseHandler(response)
+function getNearbyRestaraunts(locationObject)
 {
-    $("#yelp-response-p").text(JSON.stringify(response));
+    var queryBase = "https://developers.zomato.com/api/v2.1/search?";
+    var params = $.param(
+        {
+            lat: locationObject.latitude,
+            lon: locationObject.longitude,
+            count: 10,
+        }
+    );
+    var query = queryBase + params;
+
+    var restarauntIdData = false;
+    $.ajax(
+        {
+            method: "GET",
+            crossDomain: true,
+            url: query,
+            dataType: "json",
+            async: true,
+            headers: { "user-key": APIKEY },
+        }
+    ).then(function(response) 
+        { 
+            restarauntIdData = response; 
+            console.log(response);
+        }
+    );  
+
+    return restarauntIdData;
 }
 
-$.ajax(ajaxQuery).then(yelpResponseHandler);
+var sampleLocationData = { latitude: 37.79161, longitude: -122.42143 };
+var sampleRestarauntData = getNearbyRestaraunts(sampleLocationData);
+console.log(sampleRestarauntData);
