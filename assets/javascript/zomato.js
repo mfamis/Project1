@@ -1,8 +1,8 @@
 var APIKEY = "7e43dd3df445b7aee59f4e05cf1204c7";
+var ZOMATO_QUERY_BASE = "https://developers.zomato.com/api/v2.1/search?";
 
-function getNearbyRestaraunts(locationObject)
+function getZomatoJson(locationObject)
 {
-    var queryBase = "https://developers.zomato.com/api/v2.1/search?";
     var params = $.param(
         {
             lat: locationObject.latitude,
@@ -10,9 +10,9 @@ function getNearbyRestaraunts(locationObject)
             count: 10,
         }
     );
-    var query = queryBase + params;
+    var query = ZOMATO_QUERY_BASE + params;
 
-    var restarauntIdData = false;
+    var listingData = false;
     $.ajax(
         {
             method: "GET",
@@ -22,15 +22,40 @@ function getNearbyRestaraunts(locationObject)
             async: false,
             success: function (result) {
                 console.log(result);
-                restarauntIdData = result; 
+                listingData = result; 
             },
             headers: { "user-key": APIKEY },
         }
     );
 
-    return restarauntIdData;
+    return listingData;
 }
 
-var sampleLocationData = { latitude: 37.79161, longitude: -122.42143 };
-var sampleRestarauntData = getNearbyRestaraunts(sampleLocationData);
-console.log(sampleRestarauntData);
+function getNearbyRestaurants(location, preferences)
+{
+    var zomatoJson = getZomatoJson(location);
+    
+    var outputRestaurants = [];
+    for (zomatoIndex in zomatoJson.restaurants)
+    {
+        var zomatoListing = zomatoJson.restaurants[zomatoIndex].restaurant;
+        if (meetsUserPreferences(zomatoListing, preferences))
+        {
+            var restaurant = {};
+            restaurant["name"] = zomatoListing.name;
+            restaurant["foodType"] = zomatoListing.cuisines;
+            restaurant["image"] = zomatoListing.featured_image;
+            restaurant["description"] = "DIDN'T FIND THIS";
+            restaurant["link"] = zomatoListing.url;
+
+            outputRestaurants.push(restaurant);
+        }
+    }
+
+    return outputRestaurants;
+}
+
+function meetsUserPreferences(listing, preferences)
+{
+    return true;
+}
