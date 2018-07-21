@@ -2,126 +2,139 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Knewave" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>Roulette Eats</title>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+    crossorigin="anonymous">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Knewave" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Roulette Eats</title>
 </head>
 
 <body>
-    <div class="container">
-            <div class="row">
-                    <div class="col-md-8">
-                        <p class="title">R<span class="e">E</span></p>
-                    </div>
-                    <div class="col-md-4">
-                            <form class="form-inline">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
-                                </form>
-                    </div>
-                </div>
-    </div>
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1>Roul<span class="eats">EATS</span></h1>
-            <br>
-            <br>
-        <div class = "box">
-            <div id="cube">
-                <div class="front"><img src="https://image.flaticon.com/icons/svg/433/433138.svg"></div>
-                <div class="back"><img src="https://image.flaticon.com/icons/svg/883/883806.svg"></div>
-                <div class="right"><img src="https://image.flaticon.com/icons/svg/1037/1037793.svg"></div>
-                <div class="left"><img src="https://image.flaticon.com/icons/svg/468/468637.svg"></div>
-                <div class="top"><img src="https://image.flaticon.com/icons/svg/94/94280.svg"></div>
-                <div class="bottom"><img src="https://image.flaticon.com/icons/svg/651/651589.svg"></div>
-              </div>
-        </div>
-            <br>
-            <br>
-            <p class="lead">Too hungry to decide on a restaurant? Let us decide for you!</p>
-        </div>
-<br>
-<br>
-    </div>
-
-    <div class="container">
-          <!-- Switch -->
-        <h2>Just tell us which foods to AVOID, and go!</h2>
-        <form action="#">
-                <p>
-                  <label>
-                    <input type="checkbox" />
-                    <span>Fast Food</span>
-                  </label> 
-
-                  <label>
-                    <input type="checkbox" />
-                    <span>Meat</span>
-                  </label>
-
-                  <label>
-                    <input type="checkbox" />
-                    <span>Seafood</span>
-                  </label>
-
-                  <label>
-                    <input type="checkbox" />
-                    <span>Vegetarian</span>
-                  </label>
-
-                  <label>
-                    <input type="checkbox" />
-                    <span>Vegan</span>
-                  </label>
-
-              </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <p class="title">R
+          <span class="e">E</span>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <form class="form-inline">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
         </form>
-        
-       
-
-        <button class="btn waves-effect waves-light" type="submit" name="action">Find Food!
-                <i class="material-icons right"></i>
-              </button>
-
-              <br>
-              <br>
-                    
+      </div>
     </div>
-
-    <div class="footer">
-        <p>Copyright © 2018 RoulEATS</p>
+  </div>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1>Roul
+        <span class="eats">EATS</span>
+      </h1>
+      <br>
+      <br>
+      <div class="box">
+        <div id="cube">
+          <div class="front">
+            <img src="https://image.flaticon.com/icons/svg/433/433138.svg">
+          </div>
+          <div class="back">
+            <img src="https://image.flaticon.com/icons/svg/883/883806.svg">
+          </div>
+          <div class="right">
+            <img src="https://image.flaticon.com/icons/svg/1037/1037793.svg">
+          </div>
+          <div class="left">
+            <img src="https://image.flaticon.com/icons/svg/468/468637.svg">
+          </div>
+          <div class="top">
+            <img src="https://image.flaticon.com/icons/svg/94/94280.svg">
+          </div>
+          <div class="bottom">
+            <img src="https://image.flaticon.com/icons/svg/651/651589.svg">
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <p class="lead">Too hungry to decide on a restaurant? Let us decide for you!</p>
     </div>
+    <br>
+    <br>
+  </div>
 
+  <div class="questions">
+    <div class="container">
+      <!-- Switch -->
+      <h3>Just tell us which foods to AVOID, and go!</h3>
+      <hr>
+      <form action="#">
+        <p>
+          <label>
+            <input type="checkbox" class="fastfood" />
+            <span>Fast Food</span>
+          </label>
 
+          <label>
+            <input type="checkbox" class="meat" />
+            <span>Meat</span>
+          </label>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
-        crossorigin="anonymous"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>  
-    <script type="text/javascript" src="app.js"></script>
+          <label>
+            <input type="checkbox" class="seafood" />
+            <span>Seafood</span>
+          </label>
+
+          <label>
+            <input type="checkbox" class="vegetarian" />
+            <span>Vegetarian</span>
+          </label>
+
+          <label>
+            <input type="checkbox" class="vegan" />
+            <span>Vegan</span>
+          </label>
+
+        </p>
+      </form>
+
+      <button class="btn waves-effect waves-light orange darken-1" type="submit" name="action">Find Food!
+        <i class="fas fa-arrow-circle-right"></i>
+      </button>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Copyright © 2018 RoulEATS</p>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+    crossorigin="anonymous"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>
+  <script type="text/javascript" src="app.js"></script>
 </body>
 
 </html>
