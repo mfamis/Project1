@@ -1,4 +1,8 @@
-
+/**
+ * Used alongside the test-zomato.html page. This javascript performs
+ * a test of the zomato javascript by selecting restaurants at a
+ * random San Francisco location.
+ */
 $(document).ready(
     function()
     {
