@@ -1,8 +1,17 @@
+$(".questions").hide();
+
+$().ready(function(){
+    $(".start").on("click", function(){
+        $(".jumbotron").hide();
+        $(".questions").fadeIn();
+    });
+});
 
 var loc = {
 	lat: null,
-  lon: null,
-  	// get user's location if possible
+	lon: null,
+
+	// get user's location if possible
 	getLocation: function() {
 		if ("geolocation" in navigator) {
 			var watchID = navigator.geolocation.watchPosition(function(position) {
@@ -12,60 +21,12 @@ var loc = {
 				console.log("lat: " + loc.lat);
 				console.log("lon: " + loc.lon);
 			});
-    }
-  }
+		}
+	}
 };
-
-
-var restaurants = [{
-  name: "McDonald's",
-  image:"url",
-  foodtype:"American",
-  description:"fast food",
-  link:"url"
-}];
-
-function getNearbyRestaurants() {
-  return restaurants[Math.floor(Math.random()*restaurants.length)];
-}
-
-
-$(document).ready(function(){
-
-
 
 $().ready(function() {
     loc.getLocation();
-}
-  
-  
-$("#findfood").click(function() {
-    var resultsBody = $("<div>");
-
-    var resultsName = $("<h2>").text(getNearbyRestaurants().name);
-    resultsName.addClass("");
-
-    var resultsImage = $("<p>").text(getNearbyRestaurants().image);
-    resultsImage.addClass("");
-
-    var resultsFood = $("<p>").text(getNearbyRestaurants().foodtype);
-    resultsFood.addClass("");
-
-    var resultsDescription = $("<p>").text(getNearbyRestaurants().description);
-    resultsDescription.addClass("");
-
-    var resultsLink = $("<p>").text(getNearbyRestaurants().link);
-    resultsLink.addClass("");
-
-    resultsBody.append(resultsName, resultsImage, resultsFood, resultsDescription, resultsLink);
-    $('#results').append(resultsBody);
- 
-  });
-
-
-
-});
-
     nearbyLoc();
     });
 
