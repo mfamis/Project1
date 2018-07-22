@@ -1,4 +1,4 @@
-var APIKEY = "7e43dd3df445b7aee59f4e05cf1204c7";
+var ZOMATO_APIKEY = "7e43dd3df445b7aee59f4e05cf1204c7";
 var ZOMATO_QUERY_BASE = "https://developers.zomato.com/api/v2.1/search?";
 
 /**
@@ -28,7 +28,7 @@ function getZomatoJson(location)
                 console.log(result);
                 listingData = result; 
             },
-            headers: { "user-key": APIKEY },
+            headers: { "user-key": ZOMATO_APIKEY },
         }
     );
 
