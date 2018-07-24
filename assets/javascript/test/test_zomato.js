@@ -7,24 +7,74 @@ $(document).ready(
     function()
     {
         var sampleLocationData = { latitude: 37.79161, longitude: -122.42143 };
-        var sampleRestaurantData = getNearbyRestaurants(sampleLocationData);
-        console.log(sampleRestaurantData);
-        
-        for(restaurantIndex in sampleRestaurantData)
+        var sampleCuisineData = getNearbyCuisines(sampleLocationData);
+        var samplePreferences = {};
+        samplePreferences["excludedCuisines"] = [];
+        console.log(sampleCuisineData);
+
+        /*
+        <label>
+            <input type="checkbox" class="meat" />
+            <span>Meat</span>
+        </label>
+        */
+        for(cuisineIndex in sampleCuisineData)
         {
-            var restaurant = sampleRestaurantData[restaurantIndex];
-            var restaurantRow = $("<tr>");
-            restaurantRow.append($("<td>").text(restaurant.name));
-            restaurantRow.append($("<td>").text(restaurant.foodType));
-            restaurantRow.append($("<td>").text(restaurant.description));
-            restaurantRow.append($("<td>").text(restaurant.link));
-
-            var img = $("<img>");
-            img.attr("src", restaurant.image);
-            img.attr("width", 100);
-            restaurantRow.append($("<td>").html(img));
-
-            $("#zomato-response-tbody").append(restaurantRow);
+            var cuisine = sampleCuisineData[cuisineIndex];
+            var cuisineLabel = $("<label>");
+            var cuisineInput = $("<input>");
+            cuisineInput.attr("type", "checkbox");
+            cuisineInput.addClass("cuisine-checkbox");
+            cuisineInput.data("cuisine-name", cuisine);
+            var cuisineSpan = $("<span>").text(cuisine);
+            cuisineLabel.append(cuisineInput, cuisineSpan);
+            $("#zomato-cuisine-checkboxes").append(cuisineLabel)
         }
+        
+        function updateRestarauntTable()
+        {
+            var sampleRestaurantData = getNearbyRestaurants(sampleLocationData, samplePreferences);
+            console.log(sampleRestaurantData);
+
+            $("#zomato-response-tbody").html("");
+            for(restaurantIndex in sampleRestaurantData)
+            {
+                var restaurant = sampleRestaurantData[restaurantIndex];
+                var restaurantRow = $("<tr>");
+                restaurantRow.append($("<td>").text(restaurant.name));
+                restaurantRow.append($("<td>").text(restaurant.foodType));
+                restaurantRow.append($("<td>").text(restaurant.description));
+                restaurantRow.append($("<td>").text(restaurant.link));
+
+                var img = $("<img>");
+                img.attr("src", restaurant.image);
+                img.attr("width", 100);
+                restaurantRow.append($("<td>").html(img));
+
+                $("#zomato-response-tbody").append(restaurantRow);
+            }
+        }
+        updateRestarauntTable();
+
+        // Update restaurant listings based on which cuisine boxes are changed
+        $(".cuisine-checkbox").change(
+            function() {
+                var cuisine = $(this).data("cuisine-name");
+                if($(this).is(":checked")) 
+                {
+                    samplePreferences.excludedCuisines.push(cuisine);
+                    updateRestarauntTable();
+                    console.log("Excluding " + cuisine);
+                }
+                else
+                {
+                    var i = samplePreferences.excludedCuisines.indexOf(cuisine);
+                    samplePreferences.excludedCuisines.splice(i, 1);
+                    updateRestarauntTable();
+                    console.log("Re-adding " + cuisine);
+                }      
+            }
+        );
     }
 );
+
