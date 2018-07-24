@@ -1,20 +1,24 @@
 var ZOMATO_APIKEY = "7e43dd3df445b7aee59f4e05cf1204c7";
-var ZOMATO_QUERY_BASE = "https://developers.zomato.com/api/v2.1/search?";
+var ZOMATO_QUERY_RESTARAUNT_BASE = "https://developers.zomato.com/api/v2.1/search?";
+var ZOMATO_QUERY_CATEGORY_BASE = "https://developers.zomato.com/api/v2.1/categories";
+var ZOMATO_QUERY_CUISINE_BASE = "https://developers.zomato.com/api/v2.1/cuisines?";
 
 /**
  * Gets the Zomato API JSON data using a specific location.
  * @param {object} location - The location to search
  * @returns {object} JSON of the Zomato listings
  */
-function getZomatoJson(location)
+function getZomatoJson(queryBase, location)
 {
-    var params = $.param(
-        {
-            lat: location.latitude,
-            lon: location.longitude,
-        }
-    );
-    var query = ZOMATO_QUERY_BASE + params;
+    var paramsObj = {};
+    if (location)
+    {
+        paramsObj["lat"] = location.latitude;
+        paramsObj["lon"] = location.longitude;
+    }
+
+    var query = queryBase + $.param(paramsObj);
+    console.log("Query: " + query);
 
     var listingData = false;
     $.ajax(
@@ -45,7 +49,7 @@ function getZomatoJson(location)
  */
 function getNearbyRestaurants(location, preferences)
 {
-    var zomatoJson = getZomatoJson(location);
+    var zomatoJson = getZomatoJson(ZOMATO_QUERY_RESTARAUNT_BASE, location);
     
     var outputRestaurants = [];
     for (zomatoIndex in zomatoJson.restaurants)
@@ -71,10 +75,61 @@ function getNearbyRestaurants(location, preferences)
  * Checks if the selected restaurant meets the user preferences.
  * Until we decide on how preferences work, this will always return
  * true.
+ * 
+ * preferences = {
+ *     excludedCuisines = [ ], // array of strings of cuisines to exclude
+ * }
+ * 
  * @param {object} listing - JSON data of specific restaurant listing
- * @param {*} preferences - User preferences for restaurants
+ * @param {object} preferences - User preferences for restaurants
+ * @returns Boolean of whether or not restaurant meets user preferences
  */
 function meetsUserPreferences(listing, preferences)
 {
+    for(excludedCuisineIndex in preferences.excludedCuisines)
+    {
+        var excludedCuisine = preferences.excludedCuisines[excludedCuisineIndex];
+        if(listing.cuisines.indexOf(excludedCuisine) != -1)
+        {
+            return false;
+        }
+    }
     return true;
+}
+
+/**
+ * Get all of the categories available on Zomato
+ * @returns List of category names (such as "Delivery")
+ */
+function getAllCategories()
+{
+    var zomatoJson = getZomatoJson(ZOMATO_QUERY_CATEGORY_BASE);
+    
+    var outputCategories = [];
+    for (zomatoIndex in zomatoJson.categories)
+    {
+        var zomatoListing = zomatoJson.categories[zomatoIndex].categories;
+        outputCategories.push(zomatoListing.name);
+    }
+
+    return outputCategories;
+}
+
+/**
+ * Get all of the cuisines available nearby
+ * @returns List of cuisine names (such as "Mexican")
+ */
+function getNearbyCuisines(location)
+{
+    var zomatoJson = getZomatoJson(ZOMATO_QUERY_CUISINE_BASE, location);
+    console.log(zomatoJson);
+
+    var outputCuisines = [];
+    for (zomatoIndex in zomatoJson.cuisines)
+    {
+        var zomatoListing = zomatoJson.cuisines[zomatoIndex].cuisine;
+        outputCuisines.push(zomatoListing.cuisine_name);
+    }
+
+    return outputCuisines;
 }
