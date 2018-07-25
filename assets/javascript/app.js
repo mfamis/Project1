@@ -54,9 +54,10 @@ var exclusion = {
 	// add click listener to #resultType
 	setTypeListener: function() {
 		$(".result_type").one("click", function() {
-			var type = $(this).data("type");
+			var type = $(this).data("type").trim();
 			var index = localStorage.length;
 			
+			exclusion.preferences.excludedCuisines.push(type);
 			localStorage.setItem(`stored_${index}`, type);
 
 			$(this).addClass("text_strikethrough");
@@ -98,8 +99,8 @@ var page = {
 				$("<p>", {
 					class: "result_type",
 					id: `result_type_${t}`,
-					text: splitTypes[t].trim(),
-					"data-type": splitTypes[t].trim()
+					text: splitTypes[t],
+					"data-type": splitTypes[t]
 				}).appendTo(result_types);
 			}
 			$("#results").append(result_types);
@@ -118,10 +119,12 @@ var page = {
 			
 			createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
 
-				// scroll smoothly to results
-				$([document.documentElement, document.body]).animate({
-					scrollTop: $("#results").offset().top
-				}, 1000);
+			$("#map-canvas").appendTo("#results");
+
+			// scroll smoothly to results
+			$([document.documentElement, document.body]).animate({
+				scrollTop: $("#results").offset().top
+			}, 1000);
 		});
 	}
 };
