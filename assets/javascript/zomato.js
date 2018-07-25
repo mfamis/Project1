@@ -8,13 +8,14 @@ var ZOMATO_QUERY_CUISINE_BASE = "https://developers.zomato.com/api/v2.1/cuisines
  * @param {object} location - The location to search
  * @returns {object} JSON of the Zomato listings
  */
-function getZomatoJson(queryBase, location)
+function getZomatoJson(queryBase, location, radius)
 {
     var paramsObj = {};
     if (location)
     {
         paramsObj["lat"] = location.lat;
-        paramsObj["lon"] = location.lon;
+        paramsObj["lon"] = location.lon;    
+        paramsObj["radius"] = radius;
     }
 
     var query = queryBase + $.param(paramsObj);
@@ -49,7 +50,7 @@ function getZomatoJson(queryBase, location)
  */
 function getNearbyRestaurants(location, preferences)
 {
-    var zomatoJson = getZomatoJson(ZOMATO_QUERY_RESTARAUNT_BASE, location);
+    var zomatoJson = getZomatoJson(ZOMATO_QUERY_RESTARAUNT_BASE, location, preferences.radius);
     
     var outputRestaurants = [];
     for (zomatoIndex in zomatoJson.restaurants)
@@ -63,6 +64,8 @@ function getNearbyRestaurants(location, preferences)
             restaurant["image"] = zomatoListing.featured_image;
             restaurant["description"] = "DIDN'T FIND THIS";
             restaurant["link"] = zomatoListing.url;
+            restaurant["lat"] = zomatoListing.location.latitude;
+            restaurant["lon"] = zomatoListing.location.longitude;
 
             outputRestaurants.push(restaurant);
         }
