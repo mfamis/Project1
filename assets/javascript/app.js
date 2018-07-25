@@ -97,6 +97,8 @@ var page = {
 				text: restaurant.link
 			}).appendTo("#results");
 		});
+
+		createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
 	}
 };
 
