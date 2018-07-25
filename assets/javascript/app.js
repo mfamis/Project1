@@ -10,6 +10,11 @@ $().ready(function () {
       $(".jumbotron").hide();
       $(".questions").fadeIn();
   });
+
+  $("#findfood").on("click", function() {
+	$(".questions").hide();
+	$("#results").fadeIn();
+  });
 });
 
 // namespace object for location functions
@@ -104,8 +109,6 @@ var page = {
 	NEED TO FIX:
 	- result type will be appended before other elements
 */
-
-
 
 // // namespace object for food-finding functions
 // var rest_test = {

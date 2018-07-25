@@ -114,6 +114,10 @@ body {
     border-radius: 8px;
 
   }
+
+  #cube div img {
+    vertical-align: inherit !important;
+}
   
   #cube .front  {
     -webkit-transform: rotateY(0deg ) translateZ( 100px );
@@ -166,10 +170,15 @@ p {
     padding-top: 8px;
     letter-spacing: 2px;
     font-size: 18px;
+    line-height: 28px;
 }
 
 .eats {
     color: #FFB400;
+}
+#homepage {
+  color: #ea5455;
+
 }
 
 a {
@@ -193,6 +202,11 @@ label {
 
 .caption {
   padding-top: 30px;
+  font-size: 30px;
+}
+
+#findfood {
+  font-size: 20px;
 }
 
 .footer {
@@ -200,4 +214,14 @@ label {
     text-align: center;
     padding: 20px;
     margin-top: 60px;
+}
+
+/* IMPORTANT - must give map div height */
+#map-canvas { 
+  height: 400px;
+  width: 400px;
+}
+/* IMPORTANT - fixes webkit infoWindow rendering */
+#map-canvas img {
+  max-width: none;
 }
