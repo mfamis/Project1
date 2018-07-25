@@ -13,8 +13,8 @@ function getZomatoJson(queryBase, location)
     var paramsObj = {};
     if (location)
     {
-        paramsObj["lat"] = location.latitude;
-        paramsObj["lon"] = location.longitude;
+        paramsObj["lat"] = location.lat;
+        paramsObj["lon"] = location.lon;
     }
 
     var query = queryBase + $.param(paramsObj);

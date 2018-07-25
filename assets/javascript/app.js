@@ -13,7 +13,7 @@ $().ready(function () {
 // namespace object for location functions
 var loc = {
 	lat: null,
-  lon: null,
+    lon: null,
 	
 	// get user's location if browser 
 	getLocation: function() {
@@ -25,11 +25,27 @@ var loc = {
 				console.log("lat: " + loc.lat);
 				console.log("lon: " + loc.lon);
 			});
+    	}
     }
-  }
 };
 
 
+$("#findfood").click(function() {
+	var preferences = { excludedCuisines: [] };
+	var restaurants = getNearbyRestaurants(loc, preferences);
+	var randomIndex = Math.floor(Math.random() * restaurants.length);
+	var restaurant = restaurants[randomIndex];
+
+	var resultsBody = $("<div>");
+	var resultsName = $("<h2>").text(restaurant.name);
+	var resultsImage = $("<img>").attr("src", restaurant.image);
+	resultsImage.attr("max-width", "500px");
+	var resultsFood = $("<p>").text(restaurant.foodtype);
+	var resultsDescription = $("<p>").text(restaurant.description);
+	var resultsLink = $("<p>").text(restaurant.link);
+	resultsBody.append(resultsName, resultsImage, resultsFood, resultsDescription, resultsLink);
+	$('#results').append(resultsBody);
+});
 // // namespace object for food-finding functions
 // var rest_test = {
 
