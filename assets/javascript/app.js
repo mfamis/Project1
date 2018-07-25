@@ -2,44 +2,44 @@
 $(".questions").hide();
 
 $().ready(function () {
-  loc.getLocation();
-  exclusion.getStored();
-  page.setFindClick();
-
-  $(".start").on("click", function () {
-      $(".jumbotron").hide();
-      $(".questions").fadeIn();
-  });
-
-  $("#findfood").on("click", function() {
-	$(".questions").hide();
-	$("#results").fadeIn();
-  });
+	loc.getLocation();
+	exclusion.getStored();
+	page.setFindClick();
+	
+	$(".start").on("click", function () {
+		$(".jumbotron").hide();
+		$(".questions").fadeIn();
+	});
+	
+	$("#findfood").on("click", function() {
+		$(".questions").hide();
+		$("#results").fadeIn();
+	});
 });
 
-// namespace object for location functions
+// location data, functions
 var loc = {
 	lat: null,
-    lon: null,
-
-	// get user's location if browser 
+	lon: null,
+	
+	// get user's location if browser supports it
 	getLocation: function() {
 		if ("geolocation" in navigator) {
 			var watchID = navigator.geolocation.watchPosition(function(position) {
 				loc.lat = position.coords.latitude;
 				loc.lon = position.coords.longitude;
-
+				
 				console.log("lat: " + loc.lat);
 				console.log("lon: " + loc.lon);
 			});
-    	}
-    }
+		}
+	}
 };
 
-// namespace object 
+// cuisine exclusion data, functions
 var exclusion = {
 	preferences: { excludedCuisines: [] },
-
+	
 	// get saved exclusions from localStorage
 	getStored: function() {
 		for (var i = 0; i < localStorage.length; i++) {
@@ -50,67 +50,84 @@ var exclusion = {
 			}
 		}
 	},
-
+	
 	// add click listener to #resultType
-	addTypeListener: function() {
-		$("#resultType").one("click", function() {
-			var type = $(this).data("type");
-			var index = localStorage.length + 1;
-
+	setTypeListener: function() {
+		$(".result_type").one("click", function() {
+			var type = $(this).data("type").trim();
+			var index = localStorage.length;
+			
+			exclusion.preferences.excludedCuisines.push(type);
 			localStorage.setItem(`stored_${index}`, type);
+
+			$(this).addClass("text_strikethrough");
 			console.log(`stored: ${type}`);
-		})
+		});
 	}
 };
 
+// various page-element functions 
 var page = {
 	setFindClick: function() {
 		$("#findfood").click(function() {
-			var preferences = exclusion.preferences;
+			$("#results").empty();
 
+			var preferences = exclusion.preferences;
+			
 			var restaurants = getNearbyRestaurants(loc, preferences);
 			var randomIndex = Math.floor(Math.random() * restaurants.length);
 			var restaurant = restaurants[randomIndex];
-		
-			var resultsBody = $("<div>");
-
+			
+			var splitTypes = restaurant.foodType.split(',');
+			
 			$("<h2>", {
-				id: "resultName",
+				id: "result_name",
 				text: restaurant.name
 			}).appendTo("#results");
-
+			
 			$("<img>", {
-				id: "resultImage",
+				id: "result_image",
 				src: restaurant.image,
-				"max-width": "500px"
 			}).appendTo("#results");
+			
 
-			$("<p>", {
-				id: "resultType",
-				text: restaurant.foodType,
-				"data-type": restaurant.foodType
-			}).appendTo("#results");
-			exclusion.addTypeListener();
+			// add clickable food types
+			var result_types = $("<div></div>");
+			result_types.attr("id", "result_types");
 
+			for (t in splitTypes) {
+				$("<p>", {
+					class: "result_type",
+					id: `result_type_${t}`,
+					text: splitTypes[t],
+					"data-type": splitTypes[t]
+				}).appendTo(result_types);
+			}
+			$("#results").append(result_types);
+			exclusion.setTypeListener();
+			
+			
 			$("<p>", {
-				id: "resultDescription",
+				id: "result_description",
 				text: restaurant.description
 			}).appendTo("#results");
-
+			
 			$("<p>", {
-				id: "resultLink",
+				id: "result_link",
 				text: restaurant.link
 			}).appendTo("#results");
-		});
+			
+			createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
 
-		createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
+			$("#map-canvas").appendTo("#results");
+
+			// scroll smoothly to results
+			$([document.documentElement, document.body]).animate({
+				scrollTop: $("#results").offset().top
+			}, 1000);
+		});
 	}
 };
-
-/*
-	NEED TO FIX:
-	- result type will be appended before other elements
-*/
 
 // // namespace object for food-finding functions
 // var rest_test = {
@@ -126,22 +143,22 @@ var page = {
 //   setFoodClick: function() {
 //     $("#findfood").click(function() {
 //       var resultsBody = $("<div>");
-  
+
 //       var resultsName = $("<h2>").text(getNearbyRestaurants().name);
 //       resultsName.addClass("");
-  
+
 //       var resultsImage = $("<p>").text(getNearbyRestaurants().image);
 //       resultsImage.addClass("");
-  
+
 //       var resultsFood = $("<p>").text(getNearbyRestaurants().foodtype);
 //       resultsFood.addClass("");
-  
+
 //       var resultsDescription = $("<p>").text(getNearbyRestaurants().description);
 //       resultsDescription.addClass("");
-  
+
 //       var resultsLink = $("<p>").text(getNearbyRestaurants().link);
 //       resultsLink.addClass("");
-  
+
 //       resultsBody.append(resultsName, resultsImage, resultsFood, resultsDescription, resultsLink);
 //       $('#results').append(resultsBody);
 //     });
@@ -163,18 +180,18 @@ var page = {
 //       headers: {
 //         "user-key": "7e43dd3df445b7aee59f4e05cf1204c7"
 //       },
-  
+
 //       success: function(data) {
 //           console.log(data);
 //         var res = [];
 //         res = data.restaurants;
 //         for (var j = 0; j < res.length; j++) {
-      
+
 //             $('.results').append("<div class='name'>" + "Restaurant: " + res[j].restaurant.name + "</div>" + "\n" + "<div class='cuisines'>" + res[j].restaurant.cuisines + "</div>");
-    
+
 //         }
 //       },
-      
+
 //       error: function() {
 //         $('.results').append("<div>Sorry, data is not coming through. Refresh and try again.</div>");
 //       }
