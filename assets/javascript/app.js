@@ -8,6 +8,11 @@ $().ready(function () {
       $(".jumbotron").hide();
       $(".questions").fadeIn();
   });
+
+  $("#findfood").on("click", function() {
+	$(".questions").hide();
+	$("#results").fadeIn();
+  });
 });
 
 // namespace object for location functions
