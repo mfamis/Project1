@@ -3,6 +3,8 @@ $(".questions").hide();
 
 $().ready(function () {
   loc.getLocation();
+  exclusion.getStored();
+  page.setFindClick();
 
   $(".start").on("click", function () {
       $(".jumbotron").hide();
@@ -14,7 +16,7 @@ $().ready(function () {
 var loc = {
 	lat: null,
     lon: null,
-	
+
 	// get user's location if browser 
 	getLocation: function() {
 		if ("geolocation" in navigator) {
@@ -29,23 +31,82 @@ var loc = {
     }
 };
 
+// namespace object 
+var exclusion = {
+	preferences: { excludedCuisines: [] },
 
-$("#findfood").click(function() {
-	var preferences = { excludedCuisines: [] };
-	var restaurants = getNearbyRestaurants(loc, preferences);
-	var randomIndex = Math.floor(Math.random() * restaurants.length);
-	var restaurant = restaurants[randomIndex];
+	// get saved exclusions from localStorage
+	getStored: function() {
+		for (var i = 0; i < localStorage.length; i++) {
+			var new_exclusion = localStorage.getItem(`stored_${i}`);
+			if (exclusion.preferences.excludedCuisines.indexOf(new_exclusion) == -1 && new_exclusion != null) {
+				exclusion.preferences.excludedCuisines.push(new_exclusion);
+				console.log(`loaded: ${new_exclusion}`);
+			}
+		}
+	},
 
-	var resultsBody = $("<div>");
-	var resultsName = $("<h2>").text(restaurant.name);
-	var resultsImage = $("<img>").attr("src", restaurant.image);
-	resultsImage.attr("max-width", "500px");
-	var resultsFood = $("<p>").text(restaurant.foodtype);
-	var resultsDescription = $("<p>").text(restaurant.description);
-	var resultsLink = $("<p>").text(restaurant.link);
-	resultsBody.append(resultsName, resultsImage, resultsFood, resultsDescription, resultsLink);
-	$('#results').append(resultsBody);
-});
+	// add click listener to #resultType
+	addTypeListener: function() {
+		$("#resultType").one("click", function() {
+			var type = $(this).data("type");
+			var index = localStorage.length + 1;
+
+			localStorage.setItem(`stored_${index}`, type);
+			console.log(`stored: ${type}`);
+		})
+	}
+};
+
+var page = {
+	setFindClick: function() {
+		$("#findfood").click(function() {
+			var preferences = exclusion.preferences;
+
+			var restaurants = getNearbyRestaurants(loc, preferences);
+			var randomIndex = Math.floor(Math.random() * restaurants.length);
+			var restaurant = restaurants[randomIndex];
+		
+			var resultsBody = $("<div>");
+
+			$("<h2>", {
+				id: "resultName",
+				text: restaurant.name
+			}).appendTo("#results");
+
+			$("<img>", {
+				id: "resultImage",
+				src: restaurant.image,
+				"max-width": "500px"
+			}).appendTo("#results");
+
+			$("<p>", {
+				id: "resultType",
+				text: restaurant.foodType,
+				"data-type": restaurant.foodType
+			}).appendTo("#results");
+			exclusion.addTypeListener();
+
+			$("<p>", {
+				id: "resultDescription",
+				text: restaurant.description
+			}).appendTo("#results");
+
+			$("<p>", {
+				id: "resultLink",
+				text: restaurant.link
+			}).appendTo("#results");
+		});
+	}
+};
+
+/*
+	NEED TO FIX:
+	- result type will be appended before other elements
+*/
+
+
+
 // // namespace object for food-finding functions
 // var rest_test = {
 
