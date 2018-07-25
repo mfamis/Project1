@@ -1,12 +1,13 @@
 html,
 body {
     color: #ea5455;
+    background-color: #2d4059;
 
 }
   
   .box {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     position: relative;
     -webkit-perspective: 1000px;
     -moz-perspective: 1000px;
@@ -16,8 +17,8 @@ body {
 
   .form-inline {
       margin: auto 0;
-     
       padding-top: 12px;
+
   }
   
   #cube {
@@ -44,12 +45,12 @@ body {
   }
   
   #cube div {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     display: block;
     position: absolute;
     border: none;
-    line-height: 150px;
+    line-height: 200px;
     text-align: center;
     font-size: 50px;
     font-weight: bold;
@@ -80,57 +81,63 @@ body {
   
   .front {
     background: #ea5455;
+    border-radius: 8px;
 
   }
   
   .back {
     background: #ea5455;
+    border-radius: 8px;
 
   }
   
   .right {
     background: #ea5455;
+    border-radius: 8px;
 
   }
   
   .left {
     background: #ea5455;
+    border-radius: 8px;
   
   }
   
   .top {
     background: #ea5455;
+    border-radius: 8px;
 
   }
   
   .bottom {
     background: #ea5455;
+    border-radius: 8px;
 
   }
   
   #cube .front  {
-    -webkit-transform: rotateY(0deg ) translateZ( 75px );
-    -moz-transform: rotateY( 0deg ) translateZ( 75px );
+    -webkit-transform: rotateY(0deg ) translateZ( 100px );
+    -moz-transform: rotateY( 0deg ) translateZ( 100px );
   }
   #cube .back {
-    -webkit-transform: rotateX( 180deg ) translateZ( 75px );
-    -moz-transform: rotateX( 180deg ) translateZ( 75px );
+    -webkit-transform: rotateX( 180deg ) translateZ( 100px  );
+    -moz-transform: rotateX( 180deg ) translateZ( 100px  );
   }
   #cube .right  {
-    -webkit-transform: rotateY(  90deg ) translateZ( 75px );
-    -moz-transform: rotateY(  90deg ) translateZ( 75px );
+    -webkit-transform: rotateY(  90deg ) translateZ( 100px );
+    -moz-transform: rotateY(  90deg ) translateZ( 100px );
   }
   #cube .left   {
-    -webkit-transform: rotateY( -90deg ) translateZ( 75px );
-    -moz-transform: rotateY( -90deg ) translateZ( 75px );
+    -webkit-transform: rotateY( -90deg ) translateZ( 100px );
+    -moz-transform: rotateY( -90deg ) translateZ( 100px );
   }
   #cube .top    {
-    -webkit-transform: rotateX(  90deg ) translateZ( 75px );
-    -moz-transform: rotateX(  90deg ) translateZ( 75px );
+    -webkit-transform: rotateX(  90deg ) translateZ( 100px );
+    -moz-transform: rotateX(  90deg ) translateZ( 100px );
   }
   #cube .bottom {
-    -webkit-transform: rotateX( -90deg ) translateZ( 75px );
-    -moz-transform: rotateX( -90deg ) translateZ( 75px );
+    -webkit-transform: rotateX( -90deg ) translateZ( 100px );
+    -moz-transform: rotateX( -90deg ) translateZ( 100px );
   }
 
 h1 {
@@ -158,16 +165,21 @@ p {
     color: #FFB400;
     padding-top: 8px;
     letter-spacing: 2px;
+    font-size: 18px;
 }
 
 .eats {
     color: #FFB400;
 }
 
-.title {
-    padding-top: 30px;
-    font-size: 20px;
-    color: black;
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: white;
 }
 
 .e {
@@ -178,6 +190,11 @@ label {
     padding-right: 20px;
 
 }
+
+.caption {
+  padding-top: 30px;
+}
+
 .footer {
     background-color: #2d4059;
     text-align: center;
