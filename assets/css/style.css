@@ -215,3 +215,13 @@ label {
     padding: 20px;
     margin-top: 60px;
 }
+
+/* IMPORTANT - must give map div height */
+#map-canvas { 
+  height: 400px;
+  width: 400px;
+}
+/* IMPORTANT - fixes webkit infoWindow rendering */
+#map-canvas img {
+  max-width: none;
+}

@@ -36,7 +36,7 @@ var loc = {
 
 
 $("#findfood").click(function() {
-	var preferences = { excludedCuisines: [] };
+	var preferences = { excludedCuisines: [], radius: 3000 };
 	var restaurants = getNearbyRestaurants(loc, preferences);
 	var randomIndex = Math.floor(Math.random() * restaurants.length);
 	var restaurant = restaurants[randomIndex];
@@ -50,6 +50,8 @@ $("#findfood").click(function() {
 	var resultsLink = $("<p>").text(restaurant.link);
 	resultsBody.append(resultsName, resultsImage, resultsFood, resultsDescription, resultsLink);
 	$('#results').append(resultsBody);
+
+	createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
 });
 // // namespace object for food-finding functions
 // var rest_test = {
