@@ -101,9 +101,9 @@ var page = {
 				id: "resultLink",
 				text: restaurant.link
 			}).appendTo("#results");
-		});
 
-		createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
+			createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
+		});
 	}
 };
 
