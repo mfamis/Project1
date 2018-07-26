@@ -1,5 +1,5 @@
 var ZOMATO_APIKEY = "7e43dd3df445b7aee59f4e05cf1204c7";
-var ZOMATO_QUERY_RESTARAUNT_BASE = "https://developers.zomato.com/api/v2.1/search?";
+var ZOMATO_QUERY_RESTAURANT_BASE = "https://developers.zomato.com/api/v2.1/search?";
 var ZOMATO_QUERY_CATEGORY_BASE = "https://developers.zomato.com/api/v2.1/categories";
 var ZOMATO_QUERY_CUISINE_BASE = "https://developers.zomato.com/api/v2.1/cuisines?";
 
@@ -14,7 +14,10 @@ function getZomatoJson(queryBase, location, radius)
     if (location)
     {
         paramsObj["lat"] = location.lat;
-        paramsObj["lon"] = location.lon;    
+        paramsObj["lon"] = location.lon;  
+    }
+    if (radius)
+    {  
         paramsObj["radius"] = radius;
     }
 
@@ -22,22 +25,15 @@ function getZomatoJson(queryBase, location, radius)
     console.log("Query: " + query);
 
     var listingData = false;
-    $.ajax(
+    return $.ajax(
         {
             method: "GET",
             crossDomain: true,
             url: query,
             dataType: "json",
-            async: false,
-            success: function (result) {
-                console.log(result);
-                listingData = result; 
-            },
             headers: { "user-key": ZOMATO_APIKEY },
         }
     );
-
-    return listingData;
 }
 
 /**
@@ -46,32 +42,35 @@ function getZomatoJson(queryBase, location, radius)
  * our projects expectations.
  * @param {object} location - The location to search
  * @param {object} preferences - The preferences to compare against
- * @returns Array of restaurant objects, per project specifications
+ * @returns Promise with array of restauraunt data.
  */
 function getNearbyRestaurants(location, preferences)
 {
-    var zomatoJson = getZomatoJson(ZOMATO_QUERY_RESTARAUNT_BASE, location, preferences.radius);
-    
-    var outputRestaurants = [];
-    for (zomatoIndex in zomatoJson.restaurants)
-    {
-        var zomatoListing = zomatoJson.restaurants[zomatoIndex].restaurant;
-        if (meetsUserPreferences(zomatoListing, preferences))
+    return getZomatoJson(ZOMATO_QUERY_RESTAURANT_BASE, location, preferences.radius).then(
+        function (zomatoJson)
         {
-            var restaurant = {};
-            restaurant["name"] = zomatoListing.name;
-            restaurant["foodType"] = zomatoListing.cuisines;
-            restaurant["image"] = zomatoListing.featured_image;
-            restaurant["description"] = "DIDN'T FIND THIS";
-            restaurant["link"] = zomatoListing.url;
-            restaurant["lat"] = zomatoListing.location.latitude;
-            restaurant["lon"] = zomatoListing.location.longitude;
+            var outputRestaurants = [];
+            for (zomatoIndex in zomatoJson.restaurants)
+            {
+                var zomatoListing = zomatoJson.restaurants[zomatoIndex].restaurant;
+                if (meetsUserPreferences(zomatoListing, preferences))
+                {
+                    var restaurant = {};
+                    restaurant["name"] = zomatoListing.name;
+                    restaurant["foodType"] = zomatoListing.cuisines;
+                    restaurant["image"] = zomatoListing.featured_image;
+                    restaurant["description"] = "DIDN'T FIND THIS";
+                    restaurant["link"] = zomatoListing.url;
+                    restaurant["lat"] = zomatoListing.location.latitude;
+                    restaurant["lon"] = zomatoListing.location.longitude;
+        
+                    outputRestaurants.push(restaurant);
+                }
+            }
 
-            outputRestaurants.push(restaurant);
+            return outputRestaurants;
         }
-    }
-
-    return outputRestaurants;
+    );
 }
 
 /**
@@ -102,37 +101,46 @@ function meetsUserPreferences(listing, preferences)
 
 /**
  * Get all of the categories available on Zomato
- * @returns List of category names (such as "Delivery")
+ * @returns Promise with list of category names (such as "Delivery")
  */
 function getAllCategories()
 {
-    var zomatoJson = getZomatoJson(ZOMATO_QUERY_CATEGORY_BASE);
-    
-    var outputCategories = [];
-    for (zomatoIndex in zomatoJson.categories)
-    {
-        var zomatoListing = zomatoJson.categories[zomatoIndex].categories;
-        outputCategories.push(zomatoListing.name);
-    }
-
-    return outputCategories;
+    return getZomatoJson(ZOMATO_QUERY_CATEGORY_BASE, location).then(
+        function(zomatoJson)
+        {
+            console.log(zomatoJson);
+        
+            var outputCategories = [];
+            for (zomatoIndex in zomatoJson.categories)
+            {
+                var zomatoListing = zomatoJson.categories[zomatoIndex].categories;
+                outputCategories.push(zomatoListing.name);
+            }
+        
+            return outputCategories;
+        }
+    );
 }
 
 /**
  * Get all of the cuisines available nearby
- * @returns List of cuisine names (such as "Mexican")
+ * @returns Promise with list of cuisine names (such as "Mexican")
  */
 function getNearbyCuisines(location)
 {
-    var zomatoJson = getZomatoJson(ZOMATO_QUERY_CUISINE_BASE, location);
-    console.log(zomatoJson);
-
-    var outputCuisines = [];
-    for (zomatoIndex in zomatoJson.cuisines)
-    {
-        var zomatoListing = zomatoJson.cuisines[zomatoIndex].cuisine;
-        outputCuisines.push(zomatoListing.cuisine_name);
-    }
-
-    return outputCuisines;
+    return getZomatoJson(ZOMATO_QUERY_CUISINE_BASE, location).then(
+        function(zomatoJson)
+        {
+            console.log(zomatoJson);
+        
+            var outputCuisines = [];
+            for (zomatoIndex in zomatoJson.cuisines)
+            {
+                var zomatoListing = zomatoJson.cuisines[zomatoIndex].cuisine;
+                outputCuisines.push(zomatoListing.cuisine_name);
+            }
+        
+            return outputCuisines;
+        }
+    );
 }
