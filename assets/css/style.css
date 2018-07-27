@@ -247,6 +247,7 @@ label {
 /* results style */
 
 #results {
+	display: none;
 	font-weight: bolder;
 	background-color: #ea5455;
 	border: 2px solid white;
