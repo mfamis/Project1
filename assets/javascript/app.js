@@ -1,19 +1,16 @@
 // hides the div when we click on get started button
-$(".questions").hide();
+$("#results").hide();
+$(".showandhide").hide();
 
 $().ready(function () {
 	loc.getLocation();
 	exclusion.getStored();
 	page.setFindClick();
 	
-	$(".start").on("click", function () {
+	$(".btn").on("click", function () {
 		$(".jumbotron").hide();
-		$(".questions").fadeIn();
-	});
-	
-	$("#findfood").on("click", function() {
-		$(".questions").hide();
 		$("#results").fadeIn();
+		$("#map-canvas").fadeIn();
 	});
 });
 
@@ -69,7 +66,7 @@ var exclusion = {
 // various page-element functions 
 var page = {
 	setFindClick: function() {
-		$("#findfood").click(function() {
+		$(".btn").click(function() {
 			$("#results").empty();
 
 			var preferences = exclusion.preferences;
@@ -83,7 +80,7 @@ var page = {
 			$("<h2>", {
 				id: "result_name",
 				text: restaurant.name
-			}).appendTo("#results");
+			}).appendTo(".restaurant-name");
 			
 			$("<img>", {
 				id: "result_image",
@@ -114,12 +111,11 @@ var page = {
 			
 			$("<p>", {
 				id: "result_link",
-				text: restaurant.link
+				html: "<a href='" + restaurant.link + "' target='_blank'>" + "See more"+ "</a>"
 			}).appendTo("#results");
 			
-			createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
-
-			$("#map-canvas").appendTo("#results");
+			var displayMap=createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
+			$("#map-canvas").append(displayMap);
 
 			// scroll smoothly to results
 			$([document.documentElement, document.body]).animate({

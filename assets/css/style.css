@@ -17,6 +17,15 @@ body {
 	
 }
 
+.fa-directions {
+	color: white;
+}
+
+#result_image {
+	margin: 0 auto;
+	text-align: center;
+}
+
 .form-inline {
 	margin: auto 0;
 	padding-top: 12px;
@@ -194,10 +203,6 @@ h4 {
 	
 }
 
-.questions {
-	text-align: center;
-}
-
 p {
 	color: #FFB400;
 	padding-top: 8px;
@@ -234,6 +239,10 @@ label {
 	font-size: 20px;
 }
 
+.restaurant-name{
+	text-align: center;
+	margin: 0 auto;
+}
 
 /* results style */
 
@@ -241,15 +250,20 @@ label {
 	font-weight: bolder;
 	background-color: #ea5455;
 	border: 2px solid white;
+	margin: 0 auto;
+	text-align: center;
 }
 
 #result_name {
 	text-align: center;
 	color: white;
+	font-family: 'Knewave', cursive;
 }
 
 #result_image {
-	max-width: 500px;
+	width: 500px;
+	margin: 0 auto;
+
 }
 
 #result_types {
@@ -261,13 +275,6 @@ label {
 	text-decoration: line-through;
 }
 
-#map-canvas {
-	position: static;
-	display: inline-flex;
-	justify-content: center;
-}
-
-
 .footer {
 	background-color: #2d4059;
 	text-align: center;
@@ -277,9 +284,10 @@ label {
 
 /* IMPORTANT - must give map div height */
 #map-canvas { 
-	height: 400px;
-	width: 400px;
+	height: 100%;
+	width: 100%;
 }
+
 /* IMPORTANT - fixes webkit infoWindow rendering */
 #map-canvas img {
 	max-width: none;
