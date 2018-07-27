@@ -72,56 +72,57 @@ var page = {
 
 			var preferences = exclusion.preferences;
 			
-			var restaurants = getNearbyRestaurants(loc, preferences);
-			var randomIndex = Math.floor(Math.random() * restaurants.length);
-			var restaurant = restaurants[randomIndex];
-			
-			var splitTypes = restaurant.foodType.split(',');
-			
-			$("<h2>", {
-				id: "result_name",
-				text: restaurant.name
-			}).appendTo(".restaurant-name");
-			
-			$("<img>", {
-				id: "result_image",
-				src: restaurant.image,
-			}).appendTo("#results");
-			
-
-			// add clickable food types
-			var result_types = $("<div></div>");
-			result_types.attr("id", "result_types");
-
-			for (t in splitTypes) {
+			getNearbyRestaurants(loc, preferences).then(function(restaurants) {
+				var randomIndex = Math.floor(Math.random() * restaurants.length);
+				var restaurant = restaurants[randomIndex];
+				
+				var splitTypes = restaurant.foodType.split(',');
+				
+				$("<h2>", {
+					id: "result_name",
+					text: restaurant.name
+				}).appendTo(".restaurant-name");
+				
+				$("<img>", {
+					id: "result_image",
+					src: restaurant.image,
+				}).appendTo("#results");
+				
+	
+				// add clickable food types
+				var result_types = $("<div></div>");
+				result_types.attr("id", "result_types");
+	
+				for (t in splitTypes) {
+					$("<p>", {
+						class: "result_type",
+						id: `result_type_${t}`,
+						text: splitTypes[t],
+						"data-type": splitTypes[t]
+					}).appendTo(result_types);
+				}
+				$("#results").append(result_types);
+				exclusion.setTypeListener();
+				
 				$("<p>", {
-					class: "result_type",
-					id: `result_type_${t}`,
-					text: splitTypes[t],
-					"data-type": splitTypes[t]
-				}).appendTo(result_types);
-			}
-			$("#results").append(result_types);
-			exclusion.setTypeListener();
+					id: "result_description",
+					text: restaurant.description
+				}).appendTo("#results");
+				
+				$("<p>", {
+					id: "result_link",
+					html: "<a href='" + restaurant.link + "' target='_blank'>" + "See more"+ "</a>"
+				}).appendTo("#results");
+				
+				var displayMap=createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
+				$("#map-canvas").append(displayMap);
+	
+				// scroll smoothly to results
+				$([document.documentElement, document.body]).animate({
+					scrollTop: $("#results").offset().top
+				}, 1000);
+			})
 			
-			
-			$("<p>", {
-				id: "result_description",
-				text: restaurant.description
-			}).appendTo("#results");
-			
-			$("<p>", {
-				id: "result_link",
-				html: "<a href='" + restaurant.link + "' target='_blank'>" + "See more"+ "</a>"
-			}).appendTo("#results");
-			
-			var displayMap=createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
-			$("#map-canvas").append(displayMap);
-
-			// scroll smoothly to results
-			$([document.documentElement, document.body]).animate({
-				scrollTop: $("#results").offset().top
-			}, 1000);
 		});
 	}
 };
