@@ -71,6 +71,7 @@ var page = {
 	setFindClick: function() {
 		$("#findfood").click(function() {
 			$("#results").empty();
+			$("#results").hide();
 
 			var preferences = exclusion.preferences;
 			
@@ -123,6 +124,8 @@ var page = {
 		
 					$("#map-canvas").appendTo("#results");
 		
+					$("#results").show();
+
 					// scroll smoothly to results
 					$([document.documentElement, document.body]).animate({
 						scrollTop: $("#results").offset().top
