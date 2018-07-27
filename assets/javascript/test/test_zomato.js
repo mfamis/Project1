@@ -67,7 +67,7 @@ $(document).ready(
         updateRestarauntTable();
 
         // Update restaurant listings based on which cuisine boxes are changed
-        $(".cuisine-checkbox").change(
+        $(document).on("change", ".cuisine-checkbox",
             function() {
                 var cuisine = $(this).data("cuisine-name");
                 if($(this).is(":checked")) 
