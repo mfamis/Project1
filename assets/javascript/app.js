@@ -6,12 +6,6 @@ $().ready(function () {
 	loc.getLocation();
 	exclusion.getStored();
 	page.setFindClick();
-	
-	$(".btn").on("click", function () {
-		$(".jumbotron").hide();
-		$("#results").fadeIn();
-		$("#map-canvas").fadeIn();
-	});
 });
 
 // location data, functions
@@ -70,6 +64,8 @@ var page = {
 			$("#results").empty();
 			$("#results").hide();
 
+			$(".jumbotron").hide();
+
 			var preferences = exclusion.preferences;
 			
 			getNearbyRestaurants(loc, preferences).then(function(restaurants) {
@@ -104,14 +100,14 @@ var page = {
 				$("#results").append(result_types);
 				exclusion.setTypeListener();
 				
-				$("<p>", {
-					id: "result_description",
-					text: restaurant.description
-				}).appendTo("#results");
+				// $("<p>", {
+				// 	id: "result_description",
+				// 	text: restaurant.description
+				// }).appendTo("#results");
 				
 				$("<p>", {
 					id: "result_link",
-					html: "<a href='" + restaurant.link + "' target='_blank'>" + "See more"+ "</a>"
+					html: "<a href='" + restaurant.link + "' target='_blank'>" + "see more &raquo;"+ "</a>"
 				}).appendTo("#results");
 				
 				var displayMap=createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
@@ -121,7 +117,10 @@ var page = {
 				$([document.documentElement, document.body]).animate({
 					scrollTop: $("#results").offset().top
 				}, 1000);
-			})
+
+				$("#results").fadeIn();
+				$("#map-canvas").fadeIn();
+			});
 			
 		});
 	}

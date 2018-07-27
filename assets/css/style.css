@@ -47,15 +47,13 @@ body {
 	
 }
 
-img {
-	margin: 5px;
+#submit_it {
+	display: flex;
+	justify-content: center;
 }
 
-.fixed-action-btn {
-	position: relative;
-	top: -75px;
-	text-align: center;
-	color: #FFB400;
+img {
+	margin: 5px;
 }
 
 #cube div {
@@ -245,7 +243,6 @@ label {
 }
 
 /* results style */
-
 #results {
 	display: none;
 	font-weight: bolder;
@@ -253,6 +250,18 @@ label {
 	border: 2px solid white;
 	margin: 0 auto;
 	text-align: center;
+}
+
+#results p {
+	color: white;
+}
+
+#results a {
+	position: relative;
+	bottom: -20px;
+
+	font-size: 12pt;
+	font-weight: normal;
 }
 
 #result_name {
@@ -269,7 +278,8 @@ label {
 
 #result_types {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
+	word-spacing: 30px;
 }
 
 .text_strikethrough {
