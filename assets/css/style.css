@@ -51,13 +51,6 @@ img {
 	margin: 5px;
 }
 
-.fixed-action-btn {
-	position: relative;
-	top: -75px;
-	text-align: center;
-	color: #FFB400;
-}
-
 #cube div {
 	width: 200px;
 	height: 200px;
@@ -239,20 +232,67 @@ label {
 	font-size: 20px;
 }
 
-.restaurant-name{
+#restaurant-name{
 	text-align: center;
 	margin: 0 auto;
 }
 
+#submit_it {
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+.btn {
+	width: 200px;
+}
+
+#exclusion {
+	margin-top: 30px;
+	height: auto;
+	border: 1px solid white;
+}
+
+#exclusion p {
+	font-size: 10pt;
+}
+
+#exclusion_label p{
+	color: white;
+	font-weight: bold;
+}
+
+#exclusion_list {
+	background-color: white;
+	opacity: 50%;
+	
+	display: flex;
+	justify-content: space-evenly;
+}
+
 /* results style */
+#results_row {
+	height: 300px;
+}
 
 #results {
-	display: none;
 	font-weight: bolder;
 	background-color: #ea5455;
 	border: 2px solid white;
 	margin: 0 auto;
 	text-align: center;
+}
+
+#results p {
+	color: white;
+}
+
+#results a {
+	position: relative;
+	bottom: -20px;
+
+	font-size: 12pt;
+	font-weight: normal;
 }
 
 #result_name {
@@ -264,16 +304,21 @@ label {
 #result_image {
 	width: 500px;
 	margin: 0 auto;
-
 }
 
 #result_types {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 }
 
 .text_strikethrough {
 	text-decoration: line-through;
+}
+
+#try_again {
+	padding: 20px;
+	display: flex;
+	justify-content: center;
 }
 
 .footer {

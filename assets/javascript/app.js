@@ -6,12 +6,6 @@ $().ready(function () {
 	loc.getLocation();
 	exclusion.getStored();
 	page.setFindClick();
-	
-	$(".btn").on("click", function () {
-		$(".jumbotron").hide();
-		$("#results").fadeIn();
-		$("#map-canvas").fadeIn();
-	});
 });
 
 // location data, functions
@@ -39,13 +33,18 @@ var exclusion = {
 	
 	// get saved exclusions from localStorage
 	getStored: function() {
+		$("#exclusion").hide();
+
 		for (var i = 0; i < localStorage.length; i++) {
 			var new_exclusion = localStorage.getItem(`stored_${i}`);
 			if (exclusion.preferences.excludedCuisines.indexOf(new_exclusion) == -1 && new_exclusion != null) {
 				exclusion.preferences.excludedCuisines.push(new_exclusion);
 				console.log(`loaded: ${new_exclusion}`);
+				$("#exclusion_list").append(`<p>${new_exclusion}<p>`);
 			}
 		}
+		// show exclusions
+		$("#exclusion").fadeIn();
 	},
 	
 	// add click listener to #resultType
@@ -66,9 +65,14 @@ var exclusion = {
 // various page-element functions 
 var page = {
 	setFindClick: function() {
-		$(".btn").click(function() {
+		$(".btn").on("click", function() {
+			$("#restaurant-name").empty();
 			$("#results").empty();
 			$("#results").hide();
+			$("#map-canvas").hide();
+
+			$(".jumbotron").hide();
+			$("#try_again").hide();
 
 			var preferences = exclusion.preferences;
 			
@@ -81,7 +85,7 @@ var page = {
 				$("<h2>", {
 					id: "result_name",
 					text: restaurant.name
-				}).appendTo(".restaurant-name");
+				}).appendTo("#restaurant-name");
 				
 				$("<img>", {
 					id: "result_image",
@@ -104,25 +108,29 @@ var page = {
 				$("#results").append(result_types);
 				exclusion.setTypeListener();
 				
-				$("<p>", {
-					id: "result_description",
-					text: restaurant.description
-				}).appendTo("#results");
+				// $("<p>", {
+				// 	id: "result_description",
+				// 	text: restaurant.description
+				// }).appendTo("#results");
 				
 				$("<p>", {
 					id: "result_link",
-					html: "<a href='" + restaurant.link + "' target='_blank'>" + "See more"+ "</a>"
+					html: "<a href='" + restaurant.link + "' target='_blank'>" + "see more &raquo;"+ "</a>"
 				}).appendTo("#results");
 				
 				var displayMap=createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
 				$("#map-canvas").append(displayMap);
 	
 				// scroll smoothly to results
-				$([document.documentElement, document.body]).animate({
-					scrollTop: $("#results").offset().top
-				}, 1000);
-			})
-			
+				// $([document.documentElement, document.body]).animate({
+				// 	scrollTop: $("#results").offset().top
+				// }, 1000);
+
+				$("#results").fadeIn();
+				$("#map-canvas").fadeIn();
+				$("#try_again").fadeIn();
+				$("#results_div").fadeIn();
+			});
 		});
 	}
 };
