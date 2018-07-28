@@ -4,6 +4,7 @@ $(".showandhide").hide();
 $("#try_again").hide();
 
 $().ready(function () {
+	page.hideResults();
 	loc.getLocation();
 	exclusion.getStored();
 	page.setFindClick();
@@ -45,8 +46,11 @@ var exclusion = {
 				$("#exclusion_list").append(`<p>${new_exclusion}<p>`);
 			}
 		}
-		// show exclusions
-		$("#exclusion").fadeIn();
+		// show any exclusions
+		if (exclusion.preferences.excludedCuisines.length != 0) {
+			$("#exclusion").fadeIn();
+		}
+		
 	},
 	
 	// add click listener to #resultType
@@ -66,15 +70,21 @@ var exclusion = {
 
 // various page-element functions 
 var page = {
+
+	// hide results when page first loaded
+	hideResults: function() {
+		$("#results_div").hide();
+	},
+
 	setFindClick: function() {
 		$(".btn").on("click", function() {
-			$("#restaurant-name").empty();
-			$("#results").empty();
+			$(".jumbotron").hide();
 			$("#results").hide();
 			$("#map-canvas").hide();
-
-			$(".jumbotron").hide();
 			$("#try_again").hide();
+			$("#restaurant-name").empty();
+			$("#results").empty();
+
 
 			var preferences = exclusion.preferences;
 			
@@ -84,11 +94,13 @@ var page = {
 				
 				var splitTypes = restaurant.foodType.split(',');
 				
+				// add restaurant name
 				$("<h2>", {
 					id: "result_name",
 					text: restaurant.name
 				}).appendTo("#restaurant-name");
 				
+				// add restaurant image (if exists)
 				$("<img>", {
 					id: "result_image",
 					src: restaurant.image,
@@ -116,23 +128,26 @@ var page = {
 				$("#results").append(result_types);
 				exclusion.setTypeListener();
 				
+				// add avg cost for two
+				$("<p>", {
+					id: "result_cost",
+					text: `$${restaurant.cost} for two`,
+				}).appendTo("#results");
+
 				// $("<p>", {
 				// 	id: "result_description",
 				// 	text: restaurant.description
 				// }).appendTo("#results");
 				
+				// add link to Zomato page
 				$("<p>", {
 					id: "result_link",
 					html: "<a href='" + restaurant.link + "' target='_blank'>" + "see more &raquo;"+ "</a>"
 				}).appendTo("#results");
+				
+				var displayMap=createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon }, restaurant.name);
 
-				var displayMap=createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
 				$("#map-canvas").append(displayMap);
-	
-				// scroll smoothly to results
-				// $([document.documentElement, document.body]).animate({
-				// 	scrollTop: $("#results").offset().top
-				// }, 1000);
 
 				$("#results").fadeIn();
 				$("#map-canvas").fadeIn();

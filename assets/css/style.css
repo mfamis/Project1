@@ -229,8 +229,9 @@ label {
 }
 
 #exclusion {
+	display: flex;
 	margin-top: 30px;
-	height: auto;
+	height: 30px;
 	border: 1px solid white;
 }
 
@@ -238,22 +239,26 @@ label {
 	font-size: 10pt;
 }
 
-#exclusion_label p{
+#exclusion_label p {
 	color: white;
 	font-weight: bold;
 }
 
 #exclusion_list {
 	background-color: white;
-	opacity: 50%;
 	
 	display: flex;
 	justify-content: space-evenly;
 }
 
+#exclusion_list p {
+	color: #2d4059;
+}
+
 /* results style */
 #results_row {
-	height: 300px;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 #results {
@@ -270,14 +275,6 @@ label {
 
 #results p {
 	color: white;
-}
-
-#results a {
-	position: relative;
-	bottom: -20px;
-
-	font-size: 12pt;
-	font-weight: normal;
 }
 
 #result_name {
@@ -300,6 +297,18 @@ label {
 
 .text_strikethrough {
 	text-decoration: line-through;
+}
+
+#result_cost {
+
+}
+
+#result_link a{
+	position: relative;
+	bottom: -20px;
+
+	font-size: 10pt;
+	font-weight: normal;
 }
 
 #try_again {
