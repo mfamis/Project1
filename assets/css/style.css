@@ -75,42 +75,36 @@ img {
 
 .front {
 	background: #ea5455;
-	border-radius: 8px;
 	opacity: 0.9;
 	
 }
 
 .back {
 	background: #ea5455;
-	border-radius: 8px;
 	opacity: 0.9;
 	
 }
 
 .right {
 	background: #ea5455;
-	border-radius: 8px;
 	opacity: 0.9;
 	
 }
 
 .left {
 	background: #ea5455;
-	border-radius: 8px;
 	opacity: 0.9;
 
 }
 
 .top {
 	background: #ea5455;
-	border-radius: 8px;
 	opacity: 0.9;
 	
 }
 
 .bottom {
 	background: #ea5455;
-	border-radius: 8px;
 	opacity: 0.9;
 
 }
@@ -153,7 +147,7 @@ img {
 
 .brand h1{
 	display: inline-block;
-	
+	padding-bottom: 6px;
 	font-size: 65px;
 	font-weight: bolder;
 	font-family: 'Knewave', cursive;
@@ -289,7 +283,7 @@ label {
 #result_name {
 	text-align: center;
 	color: white;
-	font-family: 'Knewave', cursive;
+	font-weight: bolder;
 }
 
 #result_image {
