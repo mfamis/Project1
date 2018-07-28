@@ -36,7 +36,8 @@
         <br>
         <a id="homepage" href="index.html"><i class="fas fa-cube fa-4x"></i></a>
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-4">
+      </div>
     </div>
   </div>
 
@@ -92,25 +93,26 @@
     </div>
   </div>
 
-  <div id="results_div" class="container-fluid">
+    <div id="results_div" class="container-fluid">
     <div class="row">
-      <div id="restaurant-name"></div>
+      <div id="restaurant-name">
+      </div>
     </div>
     <div id="results_row" class="row">
-      <div class="col-md-6 col-sm-12">
+      <div class="col-md-6">
         <div id="results"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="try_again">
+                    <button class="btn waves-effect waves-light orange darken-1 btn-block refreshBtn btn tooltipped" data-position="bottom" data-tooltip="Don't like it? Try again!" type="submit" name="action">
+                      <img class="refresh" src="https://image.flaticon.com/icons/svg/159/159612.svg">
+                    </button>
+                  </div>
+            </div>
+          </div>
       </div>
-      <div id="map_col" class="col-md-6 col-sm-12">
+      <div class="col-md-6">
           <div id="map-canvas"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="try_again">
-          <button class="btn waves-effect waves-light orange darken-1 btn-block" type="submit" name="action">
-            Try again?
-          </button>
-        </div>
       </div>
     </div>
   </div>
