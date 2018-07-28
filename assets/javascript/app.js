@@ -1,11 +1,13 @@
 // hides the div when we click on get started button
 $("#results").hide();
 $(".showandhide").hide();
+$("#try_again").hide();
 
 $().ready(function () {
 	loc.getLocation();
 	exclusion.getStored();
 	page.setFindClick();
+
 });
 
 // location data, functions
@@ -92,7 +94,13 @@ var page = {
 					src: restaurant.image,
 				}).appendTo("#results");
 				
-	
+				$("#results").append("<div class='directionDiv'><a href='https://www.google.com/maps/search/?api=1&query=" + 
+									restaurant.lat + 
+									"," + restaurant.lon + 
+									"'><img class='directions' src='https://image.flaticon.com/icons/svg/109/109738.svg'>" + 
+									"Get Directions" +
+									"</a></div>");
+				
 				// add clickable food types
 				var result_types = $("<div></div>");
 				result_types.attr("id", "result_types");
@@ -117,7 +125,7 @@ var page = {
 					id: "result_link",
 					html: "<a href='" + restaurant.link + "' target='_blank'>" + "see more &raquo;"+ "</a>"
 				}).appendTo("#results");
-				
+
 				var displayMap=createGoogleMap({ lat: restaurant.lat, lon: restaurant.lon });
 				$("#map-canvas").append(displayMap);
 	
@@ -130,6 +138,7 @@ var page = {
 				$("#map-canvas").fadeIn();
 				$("#try_again").fadeIn();
 				$("#results_div").fadeIn();
+				$('.tooltipped').tooltip();
 			});
 		});
 	}

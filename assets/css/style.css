@@ -26,6 +26,10 @@ body {
 	text-align: center;
 }
 
+#result_link{
+	padding: 60px;
+}
+
 .form-inline {
 	margin: auto 0;
 	padding-top: 12px;
@@ -35,15 +39,9 @@ body {
 	width: 100%;
 	height: 100%;
 	position: absolute;
-
+	transition: 10s all ease-in-out;
 	transform-style: preserve-3d;
-	animation: rotatecube 10s infinite;
-
-	-webkit-transform-style: preserve-3d;
-	-webkit-animation: rotatecube 10s infinite;
-	
-	-moz-transform-style: preserve-3d;
-	-moz-animation: rotatecube 10s infinite;
+	animation: rotatecube 10s infinite linear;
 	
 }
 
@@ -64,28 +62,9 @@ img {
 }
 
 @keyframes rotatecube {
-	0% { -webkit-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
-	25% { -webkit-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
-	50% { -webkit-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
-	75% { -webkit-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
-	100% { -webkit-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
-}
-
-@-webkit-keyframes rotatecube {
-	0% { -webkit-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
-	25% { -webkit-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
-	50% { -webkit-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
-	75% { -webkit-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
-	100% { -webkit-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
-}
-
-@-moz-keyframes rotatecube {
-	0% { -moz-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
-	25% { -moz-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
-	50% { -moz-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
-	75% { -moz-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
-	100% { -moz-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
-}
+	from { transform: rotateX(0) rotateY(0); }
+	to   { transform: rotateX(360deg) rotateY(360deg); }
+  }
 
 #cube img {
 	-webkit-filter: invert(1);
@@ -97,39 +76,46 @@ img {
 .front {
 	background: #ea5455;
 	border-radius: 8px;
+	opacity: 0.9;
 	
 }
 
 .back {
 	background: #ea5455;
 	border-radius: 8px;
+	opacity: 0.9;
 	
 }
 
 .right {
 	background: #ea5455;
 	border-radius: 8px;
+	opacity: 0.9;
 	
 }
 
 .left {
 	background: #ea5455;
 	border-radius: 8px;
-	
+	opacity: 0.9;
+
 }
 
 .top {
 	background: #ea5455;
 	border-radius: 8px;
+	opacity: 0.9;
 	
 }
 
 .bottom {
 	background: #ea5455;
 	border-radius: 8px;
-	
+	opacity: 0.9;
+
 }
 
+/* rotating cube */
 #cube div img {
 	vertical-align: inherit !important;
 }
@@ -198,7 +184,7 @@ h4 {
 
 p {
 	color: #FFB400;
-	padding-top: 8px;
+	padding-top: 10px;
 	letter-spacing: 2px;
 	font-size: 18px;
 	line-height: 28px;
@@ -212,6 +198,7 @@ p {
 a {
 	text-decoration: none;
 	color: white;
+
 }
 
 a:hover {
@@ -278,9 +265,13 @@ label {
 #results {
 	font-weight: bolder;
 	background-color: #ea5455;
-	border: 2px solid white;
+	border: 1px solid white;
 	margin: 0 auto;
 	text-align: center;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	
 }
 
 #results p {
@@ -304,11 +295,13 @@ label {
 #result_image {
 	width: 500px;
 	margin: 0 auto;
+	padding: 20px;
 }
 
 #result_types {
 	display: flex;
 	justify-content: space-evenly;
+
 }
 
 .text_strikethrough {
@@ -316,10 +309,41 @@ label {
 }
 
 #try_again {
-	padding: 20px;
+	position: relative;
+	top: -40px;
 	display: flex;
 	justify-content: center;
+
 }
+
+.refreshBtn {
+	height: 80px;
+	width: 80px;
+	border-radius: 50%;
+	-webkit-box-shadow: 0px 0px 5px 0px white;
+	-moz-box-shadow: 0px 0px 5px 0px white;
+	box-shadow: 0px 0px 5px 0px white;
+}
+
+.refresh {
+	-webkit-filter: invert(1);
+	filter: invert(1);
+	max-height: 90px;
+	max-width: 90px;
+}
+
+.directionDiv {
+	padding: 20px;
+}
+
+.directions {
+	height: 30px;
+	width:	30px;
+	-webkit-filter: invert(1);
+	filter: invert(1);
+	font-weight: bold;
+}
+
 
 .footer {
 	background-color: #2d4059;
@@ -337,4 +361,8 @@ label {
 /* IMPORTANT - fixes webkit infoWindow rendering */
 #map-canvas img {
 	max-width: none;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
