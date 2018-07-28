@@ -58,6 +58,7 @@ function getNearbyRestaurants(location, preferences)
                     var restaurant = {};
                     restaurant["name"] = zomatoListing.name;
                     restaurant["foodType"] = zomatoListing.cuisines;
+                    restaurant["cost"] = zomatoListing.average_cost_for_two;
                     restaurant["image"] = zomatoListing.featured_image;
                     restaurant["description"] = "DIDN'T FIND THIS";
                     restaurant["link"] = zomatoListing.url;
