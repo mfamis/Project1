@@ -27,7 +27,7 @@ body {
 }
 
 #result_link{
-	padding: 60px;
+	padding-bottom: 60px;
 }
 
 .form-inline {
@@ -327,7 +327,7 @@ label {
 }
 
 .directionDiv {
-	padding: 20px;
+	padding-bottom: 40px;
 }
 
 .directions {

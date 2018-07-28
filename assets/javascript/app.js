@@ -97,7 +97,7 @@ var page = {
 				$("#results").append("<div class='directionDiv'><a href='https://www.google.com/maps/search/?api=1&query=" + 
 									restaurant.lat + 
 									"," + restaurant.lon + 
-									"'><img class='directions' src='https://image.flaticon.com/icons/svg/109/109738.svg'>" + 
+									"' target='_blank'><img class='directions' src='https://image.flaticon.com/icons/svg/109/109738.svg'>" + 
 									"Get Directions" +
 									"</a></div>");
 				
